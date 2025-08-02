@@ -1,6 +1,5 @@
 # Choose Starting Gear
-A mod for The Long Dark. 
-This mod allows you to choose your starting gear when starting a new game. 
+This mod allows you to choose your starting gear when starting a new game.
 
 It is intended for use when starting a new SURVIVAL MODE game. 
 
@@ -14,17 +13,7 @@ The climber waiting for friends at the Mountaineer's Hut ...
 ... You can now outfit yourself for whatever scenario you dream up!
 
 ## Requirements
-[MelonLoader](https://github.com/HerpDerpinstine/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) 
- 
-[ModSettings](https://github.com/zeobviouslyfakeacc/ModSettings/releases)
-
-## Installation:
-1. Download the latest ```ChooseStartingGear.dll``` from [releases](https://github.com/GruffCassquatch/ChooseStartingGear/releases)
-2. Drop ```ChooseStartingGear.dll``` into your Mods folder
-3. If you are updating from an older version, delete the ```ChooseStartingGear.json``` from your Mods folder as old json's can cause errors if the mod's Settings have been changed
-
-## Uninstallation:
-Delete ```ChooseStartingGear.dll``` and ```ChooseStartingGear.json``` file from your Mods folder
+ModSettings
 
 ## Using The Mod
 1. Open the ```Options``` menu
@@ -50,10 +39,10 @@ Delete ```ChooseStartingGear.dll``` and ```ChooseStartingGear.json``` file from 
 6. Each category can be toggled to show/hide
 7. Once you have made your choices, click ```CONFIRM``` to apply your changes (or ```BACK``` to exit without applying changes)
 
-## Feedback, Questions & Troubleshooting
-* I am active on [The Long Dark Modding](https://discord.gg/QvFE7VV4WZ) Discord server
-	* **General questions and feedback:** post in my channel #cass
-	* **Troubleshooting:** 
-		* While in pre-release, post in my channel #cass 
-		* For mods not in pre-release, you can post in my channel #cass or in #troubleshooting 
-		* Or create an issue here on GitHub if you're not on Discord
+## Very Special Thanks
+
+- Cass (The original mod author)
+
+## Special Thanks
+
+- The Long Dark Modding Community (Discord)
