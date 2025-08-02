@@ -28,7 +28,7 @@ ModSettings
 		* E.g. you want the standard starting gear PLUS a hatchet and some Ketchup Chips
 		* Clothing you add will equip *after* the default clothing and may end up in the outer slot
 	* ```Custom:``` You will choose all of your starting gear and receive nothing else
-		* You will still get starting items added by other mods, e.g. [binoculars](https://github.com/ds5678/Binoculars), by using the other mod's settings 
+		* You will still get starting items added by other mods by using the other mod's settings 
 5. To make the menu easier to navigate, items have been separated into the inventory categories:
 	* Clothing
 	* Fire Starting
