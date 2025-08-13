@@ -36,6 +36,8 @@ ModSettings
 6. Each category can be toggled to show/hide
 7. Once you have made your choices, click ```CONFIRM``` to apply your changes (or ```BACK``` to exit without applying changes)
 
+   NOTE: When setting custom condition values for items, they may start the game off by 1%.
+
 ## Very Special Thanks
 
 - Cass (The original mod author)
