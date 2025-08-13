@@ -331,8 +331,13 @@ namespace ChooseStartingGear
             GearItem newClothingItem;
             if (condition > 0)
             {
-                // Use normalized condition (0.0 to 1.0 range)
-                float normalizedCondition = condition / 100f; // Assuming condition is passed as percentage
+                // Round the condition to 2 decimal places to avoid floating-point precision issues
+                // This ensures that 0.69 stays as 0.69 and doesn't get rounded to 0.70
+                float normalizedCondition = (float)Math.Round(condition, 2);
+
+                // Clamp the value to ensure it's within valid range (0.0 to 1.0)
+                normalizedCondition = Mathf.Clamp01(normalizedCondition);
+
                 newClothingItem = GameManager.GetPlayerManagerComponent().InstantiateItemInPlayerInventory(gearItemPrefab, 1, normalizedCondition);
             }
             else
