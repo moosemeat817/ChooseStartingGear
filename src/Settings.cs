@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
+using ComplexLogger;
 using ModSettings;
+using static Il2Cpp.FSMHierarchy;
 
-namespace ChooseStartingGear
+namespace DLC_ChooseStartingGear_DLC
 {
     public enum ModFunction
     {
-        Default, DefaultPlus, Custom 
+        Default, DefaultPlus, Custom
     }
     public enum Condition
     {
@@ -14,50 +16,57 @@ namespace ChooseStartingGear
     // Clothing
     public enum HeadOuter
     {
-        None, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap,  GEAR_RabbitskinHat, GEAR_BasicWoolScarf, GEAR_Toque
+        None, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_RabbitskinHat, GEAR_BasicWoolScarf, GEAR_Toque,
+        GEAR_CougarWrap, GEAR_MinersHelmet, GEAR_WolfSkinHat, GEAR_wolfscarf, GEAR_WolfskinCap_MOD
     }
     public enum HeadInner
     {
-        None, GEAR_Balaclava, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_BasicWoolScarf, GEAR_Toque
+        None, GEAR_Balaclava, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_BasicWoolScarf, GEAR_Toque,
+        GEAR_MinersHelmet, GEAR_HatGatorBalaclavaA
     }
-    public enum TorsoOuter 
+    public enum TorsoOuter
     {
-        None, GEAR_BearSkinCoat, GEAR_DownVest, GEAR_PremiumWinterCoat, GEAR_SkiJacket, GEAR_MackinawJacket, GEAR_QualityWinterCoat, GEAR_MilitaryParka, GEAR_MooseHideCloak, 
-        GEAR_HeavyParka, GEAR_LightParka, GEAR_DownSkiJacket, GEAR_InsulatedVest, GEAR_DownParka, GEAR_BasicWinterCoat, GEAR_WolfSkinCape
+        None, GEAR_BearSkinCoat, GEAR_DownVest, GEAR_PremiumWinterCoat, GEAR_SkiJacket, GEAR_MackinawJacket, GEAR_QualityWinterCoat, GEAR_MilitaryParka, GEAR_MooseHideCloak,
+        GEAR_HeavyParka, GEAR_LightParka, GEAR_DownSkiJacket, GEAR_InsulatedVest, GEAR_DownParka, GEAR_BasicWinterCoat, GEAR_WolfSkinCape,
+        GEAR_MinersJacket, GEAR_TacticalJacket, GEAR_DeerskinCoat_MOD
     }
     public enum TorsoInner
     {
         None, GEAR_CowichanSweater, GEAR_CottonShirt, GEAR_FishermanSweater, GEAR_CottonHoodie, GEAR_PlaidShirt, GEAR_FleeceSweater,
-        GEAR_HeavyWoolSweater, GEAR_WoolSweater, GEAR_TeeShirt, GEAR_WoolShirt
+        GEAR_HeavyWoolSweater, GEAR_WoolSweater, GEAR_TeeShirt, GEAR_WoolShirt,
+        GEAR_TShirtSnappy, GEAR_TShirtGBI, GEAR_TShirtCM, GEAR_SweaterChristmasA, GEAR_JerseyHockeyA
     }
     public enum Hands
     {
-        None, GEAR_BasicGloves, GEAR_FleeceMittens, GEAR_Gauntlets, GEAR_RabbitSkinMittens, GEAR_SkiGloves, GEAR_Mittens, GEAR_WorkGloves
+        None, GEAR_BasicGloves, GEAR_FleeceMittens, GEAR_Gauntlets, GEAR_RabbitSkinMittens, GEAR_SkiGloves, GEAR_Mittens, GEAR_WorkGloves,
+        GEAR_MittenBrownStripe, GEAR_MittenBlueStripe, GEAR_MittenBurgundyPattern, GEAR_TacticalGloves, GEAR_DeerskinGloves_MOD
     }
     public enum AccessoriesInner
     {
-        None, GEAR_MooseHideBag, GEAR_EarMuffs
+        None, GEAR_MooseHideBag, GEAR_EarMuffs, GEAR_RifleScabbardA, GEAR_Toolbelt, GEAR_ImprovisedDownInsulation
     }
     public enum AccessoriesOuter
     {
-        None, GEAR_Crampons, GEAR_MooseHideBag, GEAR_EarMuffs
+        None, GEAR_Crampons, GEAR_MooseHideBag, GEAR_EarMuffs, GEAR_ImprovisedCrampons, GEAR_RifleScabbardA, GEAR_Toolbelt, GEAR_ImprovisedDownInsulation
     }
     public enum LegsOuter
     {
-        None, GEAR_CargoPants, GEAR_CombatPants, GEAR_DeerSkinPants, GEAR_Jeans, GEAR_InsulatedPants, GEAR_WorkPants
+        None, GEAR_CargoPants, GEAR_CombatPants, GEAR_DeerSkinPants, GEAR_Jeans, GEAR_InsulatedPants, GEAR_WorkPants,
+        GEAR_MinersPants, GEAR_WolfSkinPant
     }
     public enum LegsInner
     {
-        None, GEAR_LongUnderwear, GEAR_LongUnderwearWool
+        None, GEAR_LongUnderwear, GEAR_LongUnderwearWool, GEAR_BearskinLeggings_MOD
     }
     public enum FeetInner
     {
-        None, GEAR_ClimbingSocks, GEAR_CottonSocks, GEAR_WoolSocks
+        None, GEAR_ClimbingSocks, GEAR_CottonSocks, GEAR_WoolSocks,
+        GEAR_SockPlaid, GEAR_SockMoose, GEAR_SockDots
     }
     public enum FeetOuter
     {
-        None, GEAR_CombatBoots, GEAR_DeerSkinBoots, GEAR_InsulatedBoots, GEAR_LeatherShoes, GEAR_GreyMotherBoots, GEAR_MuklukBoots, GEAR_BasicShoes, GEAR_SkiBoots, 
-        GEAR_BasicBoots, GEAR_WorkBoots
+        None, GEAR_CombatBoots, GEAR_DeerSkinBoots, GEAR_InsulatedBoots, GEAR_LeatherShoes, GEAR_GreyMotherBoots, GEAR_MuklukBoots, GEAR_BasicShoes, GEAR_SkiBoots,
+        GEAR_BasicBoots, GEAR_WorkBoots, GEAR_MinersBoots, GEAR_WolfskinBoots_MOD
     }
 
     // Fire Starting
@@ -81,10 +90,13 @@ namespace ChooseStartingGear
     // Food and Drink
     public enum Food
     {
-        None, GEAR_AirlineFoodChick, GEAR_AirlineFoodVeg, GEAR_BeefJerky, GEAR_CandyBar, GEAR_CondensedMilk, GEAR_DogFood, GEAR_EnergyBar, GEAR_GranolaBar,  GEAR_KetchupChips, GEAR_MapleSyrup, GEAR_MRE, 
-        GEAR_PeanutButter, GEAR_PinnacleCanPeaches, GEAR_CannedBeans, GEAR_Crackers, GEAR_CannedSardines, Gear_TomatoSoupCan, GEAR_CookedMeatBear, GEAR_CookedMeatMoose, GEAR_CookedMeatRabbit, 
+        None, GEAR_AirlineFoodChick, GEAR_AirlineFoodVeg, GEAR_BeefJerky, GEAR_CandyBar, GEAR_CondensedMilk, GEAR_DogFood, GEAR_EnergyBar, GEAR_GranolaBar, GEAR_KetchupChips, GEAR_MapleSyrup, GEAR_MRE,
+        GEAR_PeanutButter, GEAR_PinnacleCanPeaches, GEAR_CannedBeans, GEAR_Crackers, GEAR_CannedSardines, Gear_TomatoSoupCan, GEAR_CookedMeatBear, GEAR_CookedMeatMoose, GEAR_CookedMeatRabbit,
         GEAR_CookedMeatWolf, GEAR_CookedMeatDeer, GEAR_CookedCohoSalmon, Gear_CookedLakeWhitefish, Gear_CookedRainbowTrout, Gear_CookedSmallmouthBass, GEAR_RawMeatBear, GEAR_RawMeatMoose, GEAR_RawMeatRabbit,
-        GEAR_RawMeatWolf, GEAR_RawMeatDeer, GEAR_RawCohoSalmon, Gear_RawLakeWhitefish, Gear_RawRainbowTrout, Gear_RawSmallmouthBass
+        GEAR_RawMeatWolf, GEAR_RawMeatDeer, GEAR_RawCohoSalmon, Gear_RawLakeWhitefish, Gear_RawRainbowTrout, Gear_RawSmallmouthBass,
+        GEAR_CannedPineapple, GEAR_DriedApples, GEAR_Pickles, GEAR_Cereal_A, GEAR_CannedCorn, GEAR_CannedHam, GEAR_Carrot, GEAR_Potato, GEAR_CookingOil, GEAR_Salt, GEAR_SaltBag, GEAR_OatsTin, GEAR_Flour,
+        GEAR_CookedMeatCougar, GEAR_RawMeatCougar,
+        GEAR_RawBurbot, GEAR_RawGoldeye, GEAR_RawRedIrishLord, GEAR_RawRockfish, GEAR_RawSmallMouthBass, GEAR_CookedBurbot, GEAR_CookedGoldeye, GEAR_CookedRedIrishLord, GEAR_CookedRockfish, GEAR_CookedSmallMouthBass
     }
     public enum Drink
     {
@@ -94,11 +106,11 @@ namespace ChooseStartingGear
     // Tools
     public enum Bedroll
     {
-        None, GEAR_BedRoll, GEAR_BearSkinBedRoll
+        None, GEAR_BedRoll, GEAR_BearSkinBedRoll, GEAR_BedRoll_Down
     }
     public enum Cooking
     {
-        None, GEAR_CookingPot, GEAR_RecycledCan
+        None, GEAR_CookingPot, GEAR_RecycledCan, GEAR_Skillet
     }
     public enum Hatchet
     {
@@ -106,11 +118,12 @@ namespace ChooseStartingGear
     }
     public enum Knife
     {
-        None, GEAR_Knife, GEAR_KnifeImprovised, GEAR_JeremiahKnife
+        None, GEAR_Knife, GEAR_KnifeImprovised, GEAR_JeremiahKnife, GEAR_SurvivalKnife, GEAR_CougarClawKnife
     }
     public enum LightSources
     {
-        None, GEAR_FlareA, GEAR_Flashlight, GEAR_BlueFlare, GEAR_KeroseneLampB, GEAR_Torch
+        None, GEAR_FlareA, GEAR_Flashlight, GEAR_BlueFlare, GEAR_KeroseneLampB, GEAR_Torch,
+        GEAR_KeroseneLamp_Spelunkers, GEAR_Flashlight_LongLasting
     }
     public enum ToolBox
     {
@@ -118,13 +131,19 @@ namespace ChooseStartingGear
     }
     public enum Weapons
     {
-        None, GEAR_FlareGun, GEAR_Rifle, GEAR_Revolver, GEAR_Bow
+        None, GEAR_FlareGun, GEAR_Rifle, GEAR_Revolver, GEAR_Bow,
+        GEAR_Rifle_Trader, GEAR_RevolverStubNosed, GEAR_RevolverFancy, GEAR_RevolverGreen, GEAR_Rifle_Barbs, GEAR_Rifle_Curators, GEAR_Rifle_Vaughns,
+        GEAR_Bow_Woodwrights, GEAR_Bow_Manufactured, GEAR_Bow_Bushcraft
     }
 
+    public enum ArrowType
+    {
+        None, GEAR_Arrow, GEAR_ArrowManufactured
+    }
 
     class ChooseStartingGearSettings : JsonModSettings
     {
-        [Section("Starting Gear Options")]
+        [Section("DLC - Starting Gear Options - DLC")]
         [Name("Choose starting gear")]
         [Description("GAME DEFAULT: This mod is disabled.\nDEFAULT PLUS: Add items in addition to the default starting gear.\nCUSTOM: Only receive the gear you choose.")]
         [Choice("Game Default", "Default PLUS", "Custom")]
@@ -148,7 +167,8 @@ namespace ChooseStartingGear
         [Section("Head")]
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Baseball Cap", "Cotton Scarf", "Cotton Toque", "Fleece Cowl", "Long Wool Scarf", "Rabbitskin Hat", "Wool Scarf", "Wool Toque")]
+        [Choice("None", "Baseball Cap", "Cotton Scarf", "Cotton Toque", "Fleece Cowl", "Long Wool Scarf", "Rabbitskin Hat", "Wool Scarf", "Wool Toque",
+                "Cougar Hide Wrap", "Miner's Helmet", "Wolfskin Hat", "Wolf Scarf (MOD)", "Wolfskin Cap (MOD)")]
         public HeadOuter headOuter = HeadOuter.None;
 
         [Name("    Item Condition")]
@@ -158,7 +178,8 @@ namespace ChooseStartingGear
 
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Balaclava", "Baseball Cap", "Cotton Scarf", "Cotton Toque", "Fleece Cowl", "Long Wool Scarf", "Wool Scarf", "Wool Toque")]
+        [Choice("None", "Balaclava", "Baseball Cap", "Cotton Scarf", "Cotton Toque", "Fleece Cowl", "Long Wool Scarf", "Wool Scarf", "Wool Toque",
+                "Miner's Helmet", "Technical Balaclava")]
         public HeadInner headInner = HeadInner.None;
 
         [Name("    Item Condition")]
@@ -166,12 +187,12 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float headInnerCondition = 1f;
 
-
         [Section("Torso (Outer)")]
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
         [Choice("None", "Bearskin Coat", "Down Vest", "Expedition Parka", "Light Shell", "Mackinaw Jacket", "Mariner's Pea Coat", "Military Coat", "Moose-Hide Cloak",
-                "Old Fashioned Parka", "Simple Parka", "Ski Jacket", "Sport Vest", "Urban Parka", "Windbreaker", "Wolfskin Coat")]
+                "Old Fashioned Parka", "Simple Parka", "Ski Jacket", "Sport Vest", "Urban Parka", "Windbreaker", "Wolfskin Coat",
+                "Miner's Jacket", "Tactical Jacket", "Deerskin Coat (MOD)")]
         public TorsoOuter torsoOuterOuter = TorsoOuter.None;
 
         [Name("    Item Condition")]
@@ -182,7 +203,8 @@ namespace ChooseStartingGear
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
         [Choice("None", "Bearskin Coat", "Down Vest", "Expedition Parka", "Light Shell", "Mackinaw Jacket", "Mariner's Pea Coat", "Military Coat", "Moose-Hide Cloak",
-                "Old Fashioned Parka", "Simple Parka", "Ski Jacket", "Sport Vest", "Urban Parka", "Windbreaker", "Wolfskin Coat")]
+                "Old Fashioned Parka", "Simple Parka", "Ski Jacket", "Sport Vest", "Urban Parka", "Windbreaker", "Wolfskin Coat",
+                "Miner's Jacket", "Tactical Jacket", "Deerskin Coat (MOD)")]
         public TorsoOuter torsoOuterInner = TorsoOuter.None;
 
         [Name("    Item Condition")]
@@ -190,13 +212,13 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float torsoOuterInnerCondition = 1f;
 
-
         [Section("Torso (Inner)")]
 
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
         [Choice("None", "Cowichan Sweater", "Dress Shirt", "Fisherman's Sweater", "Hoodie", "Plaid Shirt", "Sweatshirt", "Thick Wool Sweater",
-                "Thin Wool Sweater", "T-Shirt", "Wool Shirt")]
+                "Thin Wool Sweater", "T-Shirt", "Wool Shirt",
+                "T-Shirt (Snappy)", "T-Shirt (GBI)", "T-Shirt (CM)", "Festive Sweater", "Hockey Jersey A")]
         public TorsoInner torsoInnerOuter = TorsoInner.None;
 
         [Name("    Item Condition")]
@@ -207,7 +229,8 @@ namespace ChooseStartingGear
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
         [Choice("None", "Cowichan Sweater", "Dress Shirt", "Fisherman's Sweater", "Hoodie", "Plaid Shirt", "Sweatshirt", "Thick Wool Sweater",
-                "Thin Wool Sweater", "T-Shirt", "Wool Shirt")]
+                "Thin Wool Sweater", "T-Shirt", "Wool Shirt",
+                "T-Shirt (Snappy)", "T-Shirt (GBI)", "T-Shirt (CM)", "Festive Sweater", "Hockey Jersey A")]
         public TorsoInner torsoInnerInner = TorsoInner.None;
 
         [Name("    Item Condition")]
@@ -215,11 +238,11 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float torsoInnerInnerCondition = 1f;
 
-
         [Section("Hands")]
         [Name("Hands Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Driving Gloves", "Fleece Mittens", "Gauntlets", "Rabbitskin Mitts", "Ski Gloves", "Wool Mittens", "Work Gloves")]
+        [Choice("None", "Driving Gloves", "Fleece Mittens", "Gauntlets", "Rabbitskin Mitts", "Ski Gloves", "Wool Mittens", "Work Gloves",
+                "Patterned Wool Mittens (Brown)", "Patterned Wool Mittens (Blue)", "Patterned Wool Mittens (Burgundy)", "Tactical Gloves", "Deerskin Gloves (MOD)")]
         public Hands hands = Hands.None;
 
         [Name("    Item Condition")]
@@ -227,11 +250,10 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float handsCondition = 1f;
 
-
         [Section("Accessories")]
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Crampons", "Moose-Hide Satchel", "Wool Ear Wrap")]
+        [Choice("None", "Crampons", "Moose-Hide Satchel", "Wool Ear Wrap", "Improvised Crampons", "Security Chief's Rifle Holster", "Foreman's Toolbelt", "Improvised Down Insulation")]
         public AccessoriesOuter accessoriesOuter = AccessoriesOuter.None;
 
         [Name("    Item Condition")]
@@ -241,7 +263,7 @@ namespace ChooseStartingGear
 
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Moose-Hide Satchel", "Wool Ear Wrap")]
+        [Choice("None", "Moose-Hide Satchel", "Wool Ear Wrap", "Security Chief's Rifle Holster", "Foreman's Toolbelt", "Improvised Down Insulation")]
         public AccessoriesInner accessoriesInner = AccessoriesInner.None;
 
         [Name("    Item Condition")]
@@ -249,11 +271,11 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float accessoriesInnerCondition = 1f;
 
-
         [Section("Legs (Outer)")]
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Cargo Pants", "Combat Pants", "Deerskin Pants", "Jeans", "Snow Pants", "Work Pants")]
+        [Choice("None", "Cargo Pants", "Combat Pants", "Deerskin Pants", "Jeans", "Snow Pants", "Work Pants",
+                "Miner's Pants", "Wolfskin Pants")]
         public LegsOuter legsOuterOuter = LegsOuter.None;
 
         [Name("    Item Condition")]
@@ -263,7 +285,8 @@ namespace ChooseStartingGear
 
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Cargo Pants", "Combat Pants", "Deerskin Pants", "Jeans", "Snow Pants", "Work Pants")]
+        [Choice("None", "Cargo Pants", "Combat Pants", "Deerskin Pants", "Jeans", "Snow Pants", "Work Pants",
+                "Miner's Pants", "Wolfskin Pants")]
         public LegsOuter legsOuterInner = LegsOuter.None;
 
         [Name("    Item Condition")]
@@ -271,12 +294,11 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float legsOuterInnerCondition = 1f;
 
-
         [Section("Legs (Inner)")]
 
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Thermal Underwear", "Wool Longjohns")]
+        [Choice("None", "Thermal Underwear", "Wool Longjohns", "Bearskin Leggings (MOD)")]
         public LegsInner legsInnerOuter = LegsInner.None;
 
         [Name("    Item Condition")]
@@ -286,7 +308,7 @@ namespace ChooseStartingGear
 
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Thermal Underwear", "Wool Longjohns")]
+        [Choice("None", "Thermal Underwear", "Wool Longjohns", "Bearskin Leggings (MOD)")]
         public LegsInner legsInnerInner = LegsInner.None;
 
         [Name("    Item Condition")]
@@ -294,11 +316,11 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float legsInnerInnerCondition = 1f;
 
-
         [Section("Feet (Inner)")]
         [Name("Outer Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Climbing Socks", "Sports Socks", "Wool Socks")]
+        [Choice("None", "Climbing Socks", "Sports Socks", "Wool Socks",
+                "Patterned Wool Socks (Plaid)", "Patterned Wool Socks (Moose)", "Patterned Wool Socks (Dots)")]
         public FeetInner feetInnerOuter = FeetInner.None;
 
         [Name("    Item Condition")]
@@ -308,7 +330,8 @@ namespace ChooseStartingGear
 
         [Name("Inner Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Climbing Socks", "Sports Socks", "Wool Socks")]
+        [Choice("None", "Climbing Socks", "Sports Socks", "Wool Socks",
+                "Patterned Wool Socks (Plaid)", "Patterned Wool Socks (Moose)", "Patterned Wool Socks (Dots)")]
         public FeetInner feetInnerInner = FeetInner.None;
 
         [Name("    Item Condition")]
@@ -316,18 +339,17 @@ namespace ChooseStartingGear
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float feetInnerInnerCondition = 1f;
 
-
         [Section("Feet (Outer)")]
         [Name("Shoe Slot Item")]
         [Description("Choose clothing item for this slot")]
-        [Choice("None", "Combat Boots", "Deerskin Boots", "Insulated Boots", "Leather Shoes", "Mountaineering Boots", "Mukluks", "Running Shoes", "Ski Boots","Trail Boots", "Work Boots")]
+        [Choice("None", "Combat Boots", "Deerskin Boots", "Insulated Boots", "Leather Shoes", "Mountaineering Boots", "Mukluks", "Running Shoes", "Ski Boots", "Trail Boots", "Work Boots",
+                "Miner's Boots", "Wolfskin Boots (MOD)")]
         public FeetOuter feetOuter = FeetOuter.None;
 
         [Name("    Item Condition")]
         [Description("Default is 100%")]
         [Slider(0f, 1f, 101, NumberFormat = "{0:P0}")]
         public float feetOuterCondition = 1f;
-
 
         // Fire Starting
         [Section("Fire Starting")]
@@ -363,7 +385,6 @@ namespace ChooseStartingGear
         [Name("Accelerant")]
         [Choice("None", "Accelerant", "Lamp Fuel")]
         public Accelerant accelerant = Accelerant.None;
-
 
         // First Aid
         [Section("First Aid")]
@@ -421,6 +442,20 @@ namespace ChooseStartingGear
         [Slider(0, 24)]
         public int waterPurificationTablets = 0;
 
+        [Name("Caffeine Pills")]
+        [Description("Quantity")]
+        [Slider(0, 5)]
+        public int caffeinePills = 0;
+
+        [Name("Vitamin-C Pills")]
+        [Description("Quantity")]
+        [Slider(0, 5)]
+        public int vitaminCPills = 0;
+
+        [Name("Heat Pack")]
+        [Description("Quantity")]
+        [Slider(0, 5)]
+        public int heatPad = 0;
 
         // Food and Drink
         [Section("Food and Drink")]
@@ -429,38 +464,53 @@ namespace ChooseStartingGear
         public bool foodDrink = false;
 
         [Name("Food Item 1")]
-        [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE", 
-                "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison", 
+        [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE",
+                "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison",
                 "Cooked Coho Salmon", "Cooked Lake Whitefish", "Cooked Rainbow Trout", "Cooked Smallmouth Bass", "Raw Bear Meat", "Raw Moose Meat", "Raw Rabbit Meat", "Raw Wolf Meat", "Raw Venison",
-                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass")]
+                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass",
+                "Canned Pineapple", "Dried Apples", "Pickles", "Cereal", "Canned Corn", "Canned Ham", "Carrot", "Potato", "Cooking Oil", "Salt", "Salt Bag", "Oats Tin", "Flour",
+                "Cooked Meat Cougar", "Raw Meat Cougar",
+                "Raw Burbot", "Raw Goldeye", "Raw Red Irish Lord", "Raw Rockfish", "Raw Smallmouth Bass", "Cooked Burbot", "Cooked Goldeye", "Cooked Red Irish Lord", "Cooked Rockfish", "Cooked Smallmouth Bass")]
         public Food food1 = Food.None;
 
         [Name("Food Item 2")]
         [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE",
                 "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison",
                 "Cooked Coho Salmon", "Cooked Lake Whitefish", "Cooked Rainbow Trout", "Cooked Smallmouth Bass", "Raw Bear Meat", "Raw Moose Meat", "Raw Rabbit Meat", "Raw Wolf Meat", "Raw Venison",
-                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass")]
+                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass",
+                "Canned Pineapple", "Dried Apples", "Pickles", "Cereal", "Canned Corn", "Canned Ham", "Carrot", "Potato", "Cooking Oil", "Salt", "Salt Bag", "Oats Tin", "Flour",
+                "Cooked Meat Cougar", "Raw Meat Cougar",
+                "Raw Burbot", "Raw Goldeye", "Raw Red Irish Lord", "Raw Rockfish", "Raw Smallmouth Bass", "Cooked Burbot", "Cooked Goldeye", "Cooked Red Irish Lord", "Cooked Rockfish", "Cooked Smallmouth Bass")]
         public Food food2 = Food.None;
 
         [Name("Food Item 3")]
         [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE",
                 "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison",
                 "Cooked Coho Salmon", "Cooked Lake Whitefish", "Cooked Rainbow Trout", "Cooked Smallmouth Bass", "Raw Bear Meat", "Raw Moose Meat", "Raw Rabbit Meat", "Raw Wolf Meat", "Raw Venison",
-                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass")]
+                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass",
+                "Canned Pineapple", "Dried Apples", "Pickles", "Cereal", "Canned Corn", "Canned Ham", "Carrot", "Potato", "Cooking Oil", "Salt", "Salt Bag", "Oats Tin", "Flour",
+                "Cooked Meat Cougar", "Raw Meat Cougar",
+                "Raw Burbot", "Raw Goldeye", "Raw Red Irish Lord", "Raw Rockfish", "Raw Smallmouth Bass", "Cooked Burbot", "Cooked Goldeye", "Cooked Red Irish Lord", "Cooked Rockfish", "Cooked Smallmouth Bass")]
         public Food food3 = Food.None;
 
         [Name("Food Item 4")]
         [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE",
                 "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison",
                 "Cooked Coho Salmon", "Cooked Lake Whitefish", "Cooked Rainbow Trout", "Cooked Smallmouth Bass", "Raw Bear Meat", "Raw Moose Meat", "Raw Rabbit Meat", "Raw Wolf Meat", "Raw Venison",
-                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass")]
+                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass",
+                "Canned Pineapple", "Dried Apples", "Pickles", "Cereal", "Canned Corn", "Canned Ham", "Carrot", "Potato", "Cooking Oil", "Salt", "Salt Bag", "Oats Tin", "Flour",
+                "Cooked Meat Cougar", "Raw Meat Cougar",
+                "Raw Burbot", "Raw Goldeye", "Raw Red Irish Lord", "Raw Rockfish", "Raw Smallmouth Bass", "Cooked Burbot", "Cooked Goldeye", "Cooked Red Irish Lord", "Cooked Rockfish", "Cooked Smallmouth Bass")]
         public Food food4 = Food.None;
 
         [Name("Food Item 5")]
         [Choice("None", "Airline Food - Chicken", "Airline Food - Vegetarian", "Beef Jerky", "Candy Bar", "Condensed Milk", "Dog Food", "Energy Bar", "Granola Bar", "Ketchup Chips", "Maple Syrup", "Military-Grade MRE",
                 "Peanut Butter", "Pinnacle Peaches", "Pork and Beans", "Salty Crackers", "Tin of Sardines", "Tomato Soup", "Cooked Bear Meat", "Cooked Moose Meat", "Cooked Rabbit Meat", "Cooked Wolf Meat", "Cooked Venison",
                 "Cooked Coho Salmon", "Cooked Lake Whitefish", "Cooked Rainbow Trout", "Cooked Smallmouth Bass", "Raw Bear Meat", "Raw Moose Meat", "Raw Rabbit Meat", "Raw Wolf Meat", "Raw Venison",
-                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass")]
+                "Raw Coho Salmon", "Raw Lake Whitefish", "Raw Rainbow Trout", "Raw Smallmouth Bass",
+                "Canned Pineapple", "Dried Apples", "Pickles", "Cereal", "Canned Corn", "Canned Ham", "Carrot", "Potato", "Cooking Oil", "Salt", "Salt Bag", "Oats Tin", "Flour",
+                "Cooked Meat Cougar", "Raw Meat Cougar",
+                "Raw Burbot", "Raw Goldeye", "Raw Red Irish Lord", "Raw Rockfish", "Raw Smallmouth Bass", "Cooked Burbot", "Cooked Goldeye", "Cooked Red Irish Lord", "Cooked Rockfish", "Cooked Smallmouth Bass")]
         public Food food5 = Food.None;
 
         [Name("Drink Item 1")]
@@ -495,18 +545,18 @@ namespace ChooseStartingGear
         public bool tools = false;
 
         [Name("Bedroll")]
-        [Choice("None", "Bedroll", "Bearskin Bedroll")]
+        [Choice("None", "Bedroll", "Bearskin Bedroll", "Bedroll Down")]
         public Bedroll bedroll = Bedroll.None;
 
         [Name("Can Opener")]
         public bool canOpener = false;
 
         [Name("Cooking Item 1")]
-        [Choice("None", "Cooking Pot", "Recycled Can")]
+        [Choice("None", "Cooking Pot", "Recycled Can", "Skillet")]
         public Cooking cooking1 = Cooking.None;
 
         [Name("Cooking Item 2")]
-        [Choice("None", "Cooking Pot", "Recycled Can")]
+        [Choice("None", "Cooking Pot", "Recycled Can", "Skillet")]
         public Cooking cooking2 = Cooking.None;
 
         [Name("Fishing Tackle")]
@@ -528,11 +578,11 @@ namespace ChooseStartingGear
         public int hook = 0;
 
         [Name("Knife")]
-        [Choice("None", "Hunting Knife", "Improvised Knife", "Jeremiah's Knife")]
+        [Choice("None", "Hunting Knife", "Improvised Knife", "Jeremiah's Knife", "Survival Knife", "Cougar Claw Knife")]
         public Knife knife = Knife.None;
 
         [Name("Light Source")]
-        [Choice("None", "Flare", "Flashlight", "Marine Flare", "Storm Lantern", "Torch")]
+        [Choice("None", "Flare", "Flashlight", "Marine Flare", "Storm Lantern", "Torch", "Spelunker's Lantern", "Miner's Flashlight")]
         public LightSources lightSource = LightSources.None;
 
         [Name("Line")]
@@ -562,8 +612,13 @@ namespace ChooseStartingGear
         public ToolBox toolBox = ToolBox.None;
 
         [Name("Weapon")]
-        [Choice("None", "Distress Pistol", "Hunting Rifle", "Revolver", "Survival Bow")]
+        [Choice("None", "Distress Pistol", "Hunting Rifle", "Revolver", "Survival Bow", "Bunker Rifle", "Warden's Revolver", "Forester's Revolver", "Hunter's Revolver",
+                "Barb's Rifle", "Curator's Rifle", "Vaughn's Rifle", "Woodwrioght's Bow", "Sport Bow", "Bushcraft Bow")]
         public Weapons weapon = Weapons.None;
+
+        [Name("Arrow Type")]
+        [Choice("None", "Simple Arrow", "Manufactured Arrow")]
+        public ArrowType arrowType = ArrowType.None;
 
         [Name("    Ammunition")]
         [Description("Quantity of Ammunition for chosen Weapon")]
@@ -573,6 +628,51 @@ namespace ChooseStartingGear
         [Name("Whetstone")]
         public bool whetstone = false;
 
+        // DLC Tools
+        [Name("Sticker Flask")]
+        public bool stickFlask = false;
+
+        [Name("Camera")]
+        public bool camera = false;
+
+        [Name("FastFilm-500")]
+        [Description("Quantity")]
+        [Slider(0, 30)]
+        public int filmBoxColour = 0;
+
+        [Name("FastFilm-500BW")]
+        [Description("Quantity")]
+        [Slider(0, 30)]
+        public int filmBoxBW = 0;
+
+        [Name("FastFilm-500SPA")]
+        [Description("Quantity")]
+        [Slider(0, 30)]
+        public int filmBoxSepia = 0;
+
+        [Name("Wires")]
+        [Description("Quantity")]
+        [Slider(0, 10)]
+        public int wireBundle = 0;
+
+        [Name("Fuses")]
+        [Description("Quantity")]
+        [Slider(0, 10)]
+        public int fuse = 0;
+
+        [Name("Travois")]
+        public bool travois = false;
+
+        [Name("Handheld Shortwave")]
+        public bool handheldShortwave = false;
+
+        [Name("Respirator")]
+        public bool respirator = false;
+
+        [Name("Canister")]
+        [Description("Quantity")]
+        [Slider(0, 5)]
+        public int canister = 0;
 
         // Materials
         [Section("Materials")]
@@ -629,7 +729,6 @@ namespace ChooseStartingGear
         [Slider(0, 5)]
         public int stumpRemover = 0;
 
-
         [Section("        Hides and Gut")]
         [Name("Show Hides and Gut")]
         [Description("Show/Hide menu. Any selected items WILL be added even if menu is hidden.")]
@@ -683,6 +782,9 @@ namespace ChooseStartingGear
         [Slider(0, 5)]
         public int wolfPeltFresh = 0;
 
+        [Name("Cougar Claw")]
+        [Slider(0, 5)]
+        public int cougarClaw = 0;
 
         [Section("        Saplings")]
         [Name("Show Saplings")]
@@ -705,7 +807,6 @@ namespace ChooseStartingGear
         [Slider(0, 5)]
         public int mapleSaplingFresh = 0;
 
-
         [Section("        Other Materials")]
         [Name("Show Other Materials")]
         [Description("Show/Hide menu. Any selected items WILL be added even if menu is hidden.")]
@@ -723,33 +824,32 @@ namespace ChooseStartingGear
         [Slider(0, 5)]
         public int scrapMetal = 0;
 
-
         protected override void OnChange(FieldInfo field, object oldValue, object newValue)
         {
-            if (field.Name == nameof(modFunction) || 
+            if (field.Name == nameof(modFunction) ||
                 field.Name == nameof(clothing) ||
                 field.Name == nameof(clothingSet) ||
                 field.Name == nameof(clothingCondition) ||
-                field.Name == nameof(headOuter) || field.Name == nameof(headInner) || 
+                field.Name == nameof(headOuter) || field.Name == nameof(headInner) ||
                 field.Name == nameof(torsoOuterOuter) || field.Name == nameof(torsoOuterInner) ||
                 field.Name == nameof(torsoInnerOuter) || field.Name == nameof(torsoInnerInner) ||
-                field.Name == nameof(hands) || 
+                field.Name == nameof(hands) ||
                 field.Name == nameof(accessoriesOuter) || field.Name == nameof(accessoriesInner) ||
                 field.Name == nameof(legsOuterOuter) || field.Name == nameof(legsOuterInner) ||
                 field.Name == nameof(legsInnerOuter) || field.Name == nameof(legsInnerInner) ||
                 field.Name == nameof(feetInnerOuter) || field.Name == nameof(feetInnerInner) ||
                 field.Name == nameof(feetOuter) ||
-                field.Name == nameof(fireStarting) || 
-                field.Name == nameof(firestarter) || field.Name == nameof(tinderType) || field.Name == nameof(fuelType) || 
-                field.Name == nameof(firstAid) || 
+                field.Name == nameof(fireStarting) ||
+                field.Name == nameof(firestarter) || field.Name == nameof(tinderType) || field.Name == nameof(fuelType) ||
+                field.Name == nameof(firstAid) ||
                 field.Name == nameof(foodDrink) ||
                 field.Name == nameof(food1) || field.Name == nameof(food2) || field.Name == nameof(food3) || field.Name == nameof(food4) ||
                 field.Name == nameof(drink1) || field.Name == nameof(drink2) || field.Name == nameof(drink3) || field.Name == nameof(drink4) ||
-                field.Name == nameof(tools) || 
+                field.Name == nameof(tools) ||
                 field.Name == nameof(cooking1) ||
                 field.Name == nameof(weapon) ||
-                field.Name == nameof(materials) || 
-                field.Name == nameof(ammunition) || field.Name == nameof(hides) || field.Name == nameof(saplings) || field.Name == nameof(other)) 
+                field.Name == nameof(materials) ||
+                field.Name == nameof(ammunition) || field.Name == nameof(hides) || field.Name == nameof(saplings) || field.Name == nameof(other))
             {
                 RefreshFields();
             }
@@ -767,7 +867,7 @@ namespace ChooseStartingGear
 
             // Clothing
             SetFieldVisible(nameof(clothingSet), Settings.settings.modFunction == ModFunction.Custom && clothing);
-            SetFieldVisible(nameof(clothingCondition), Settings.settings.modFunction != ModFunction.Default && clothing && clothingSet == false) ;
+            SetFieldVisible(nameof(clothingCondition), Settings.settings.modFunction != ModFunction.Default && clothing && clothingSet == false);
             SetFieldVisible(nameof(headOuter), Settings.settings.modFunction != ModFunction.Default && clothing && clothingSet == false);
             SetFieldVisible(nameof(headOuterCondition), Settings.settings.modFunction != ModFunction.Default && clothing && clothingCondition == Condition.Custom && headOuter != HeadOuter.None && clothingSet == false);
             SetFieldVisible(nameof(headInner), Settings.settings.modFunction != ModFunction.Default && clothing && clothingSet == false);
@@ -829,6 +929,9 @@ namespace ChooseStartingGear
             SetFieldVisible(nameof(preparedReshiMushrooms), Settings.settings.modFunction != ModFunction.Default && firstAid);
             SetFieldVisible(nameof(preparedRoseHips), Settings.settings.modFunction != ModFunction.Default && firstAid);
             SetFieldVisible(nameof(waterPurificationTablets), Settings.settings.modFunction != ModFunction.Default && firstAid);
+            SetFieldVisible(nameof(caffeinePills), Settings.settings.modFunction != ModFunction.Default && firstAid);
+            SetFieldVisible(nameof(vitaminCPills), Settings.settings.modFunction != ModFunction.Default && firstAid);
+            SetFieldVisible(nameof(heatPad), Settings.settings.modFunction != ModFunction.Default && firstAid);
 
             // Food & Drink
             SetFieldVisible(nameof(food1), Settings.settings.modFunction != ModFunction.Default && foodDrink);
@@ -865,6 +968,20 @@ namespace ChooseStartingGear
             SetFieldVisible(nameof(sprayPaint), Settings.settings.modFunction != ModFunction.Default && tools);
             SetFieldVisible(nameof(toolBox), Settings.settings.modFunction != ModFunction.Default && tools);
             SetFieldVisible(nameof(whetstone), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(arrowType), Settings.settings.modFunction != ModFunction.Default && tools);
+
+            // DLC Tools
+            SetFieldVisible(nameof(stickFlask), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(camera), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(filmBoxColour), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(filmBoxBW), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(filmBoxSepia), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(wireBundle), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(fuse), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(travois), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(handheldShortwave), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(respirator), Settings.settings.modFunction != ModFunction.Default && tools);
+            SetFieldVisible(nameof(canister), Settings.settings.modFunction != ModFunction.Default && tools);
 
             // Materials
             SetFieldVisible(nameof(ammunition), Settings.settings.modFunction != ModFunction.Default && materials);
@@ -896,6 +1013,7 @@ namespace ChooseStartingGear
             SetFieldVisible(nameof(rabbitPeltFresh), Settings.settings.modFunction != ModFunction.Default && materials && hides);
             SetFieldVisible(nameof(wolfPeltCured), Settings.settings.modFunction != ModFunction.Default && materials && hides);
             SetFieldVisible(nameof(wolfPeltFresh), Settings.settings.modFunction != ModFunction.Default && materials && hides);
+            SetFieldVisible(nameof(cougarClaw), Settings.settings.modFunction != ModFunction.Default && materials && hides);
 
             SetFieldVisible(nameof(birchSaplingCured), Settings.settings.modFunction != ModFunction.Default && materials && saplings);
             SetFieldVisible(nameof(birchSaplingFresh), Settings.settings.modFunction != ModFunction.Default && materials && saplings);
@@ -907,13 +1025,14 @@ namespace ChooseStartingGear
             SetFieldVisible(nameof(scrapMetal), Settings.settings.modFunction != ModFunction.Default && materials && other);
         }
     }
+    
     internal static class Settings
     {
         public static ChooseStartingGearSettings settings;
         public static void OnLoad()
         {
             settings = new ChooseStartingGearSettings();
-            settings.AddToModSettings("Choose Starting Gear");
+            settings.AddToModSettings("DLC - Choose Starting Gear - DLC");
             settings.RefreshFields();
         }
     }

@@ -6,11 +6,11 @@ using MelonLoader;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChooseStartingGear")]
+[assembly: AssemblyTitle("DLC_ChooseStartingGear_DLC")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ChooseStartingGear")]
+[assembly: AssemblyProduct("DLC_ChooseStartingGear_DLC")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -33,7 +33,7 @@ using MelonLoader;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.1.0")]
-[assembly: AssemblyFileVersion("2.1.0")]
-[assembly: MelonInfo(typeof(ChooseStartingGear.Implementation), "ChooseStartingGear", "2.1.0", "moosemeat")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyFileVersion("1.1.0")]
+[assembly: MelonInfo(typeof(DLC_ChooseStartingGear_DLC.Implementation), "DLC_ChooseStartingGear_DLC", "1.1.0", "moosemeat")]
 [assembly: MelonGame("Hinterland", "TheLongDark")]

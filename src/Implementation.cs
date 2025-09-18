@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using UnityEngine;
 
-namespace ChooseStartingGear
+namespace DLC_ChooseStartingGear_DLC
 {
     public class Implementation : MelonMod
     {
