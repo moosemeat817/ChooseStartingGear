@@ -7,64 +7,56 @@ using HarmonyLib;
 using Il2Cpp;
 using Il2CppTLD.Gear;
 
-namespace DLC_ChooseStartingGear_DLC
+namespace ChooseStartingGear
 {
     // Clothing
     public enum RandomHeadOuter
     {
-        GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_RabbitskinHat, GEAR_BasicWoolScarf, GEAR_Toque,
-        GEAR_CougarWrap, GEAR_MinersHelmet, GEAR_WolfSkinHat, GEAR_wolfscarf, GEAR_WolfskinCap_MOD
+        GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_BasicWoolScarf, GEAR_Toque
     }
     public enum RandomHeadInner
     {
-        GEAR_Balaclava, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_BasicWoolScarf, GEAR_Toque,
-        GEAR_MinersHelmet, GEAR_HatGatorBalaclavaA
+        GEAR_Balaclava, GEAR_BaseballCap, GEAR_CottonScarf, GEAR_BasicWoolHat, GEAR_WoolWrapCap, GEAR_WoolWrap, GEAR_BasicWoolScarf, GEAR_Toque
     }
     public enum RandomTorsoOuter
     {
-        GEAR_BearSkinCoat, GEAR_DownVest, GEAR_PremiumWinterCoat, GEAR_SkiJacket, GEAR_MackinawJacket, GEAR_QualityWinterCoat, GEAR_MilitaryParka, GEAR_MooseHideCloak,
-        GEAR_HeavyParka, GEAR_LightParka, GEAR_DownSkiJacket, GEAR_InsulatedVest, GEAR_DownParka, GEAR_BasicWinterCoat, GEAR_WolfSkinCape,
-        GEAR_MinersJacket, GEAR_TacticalJacket, GEAR_DeerskinCoat_MOD
+        GEAR_DownVest, GEAR_SkiJacket, GEAR_MackinawJacket, GEAR_QualityWinterCoat, GEAR_MilitaryParka, GEAR_HeavyParka, GEAR_LightParka, GEAR_DownSkiJacket, GEAR_InsulatedVest, GEAR_DownParka, GEAR_BasicWinterCoat
     }
     public enum RandomTorsoInner
     {
-        GEAR_CowichanSweater, GEAR_CottonShirt, GEAR_FishermanSweater, GEAR_CottonHoodie, GEAR_PlaidShirt, GEAR_FleeceSweater, GEAR_HeavyWoolSweater, GEAR_WoolSweater, GEAR_TeeShirt, GEAR_WoolShirt,
-        GEAR_TShirtSnappy, GEAR_TShirtGBI, GEAR_TShirtCM, GEAR_SweaterChristmasA, GEAR_JerseyHockeyA
+        GEAR_CowichanSweater, GEAR_CottonShirt, GEAR_FishermanSweater, GEAR_CottonHoodie, GEAR_PlaidShirt, GEAR_FleeceSweater, GEAR_HeavyWoolSweater, GEAR_WoolSweater, GEAR_TeeShirt, GEAR_WoolShirt
     }
     public enum RandomHands
     {
-        GEAR_BasicGloves, GEAR_FleeceMittens, GEAR_Gauntlets, GEAR_RabbitSkinMittens, GEAR_SkiGloves, GEAR_Mittens, GEAR_WorkGloves,
-        GEAR_MittenBrownStripe, GEAR_MittenBlueStripe, GEAR_MittenBurgundyPattern, GEAR_TacticalGloves, GEAR_DeerskinGloves_MOD
+        GEAR_BasicGloves, GEAR_FleeceMittens, GEAR_SkiGloves, GEAR_Mittens
     }
     public enum RandomAccessoriesInner
     {
-        GEAR_MooseHideBag, GEAR_EarMuffs, GEAR_RifleScabbardA, GEAR_Toolbelt, GEAR_ImprovisedDownInsulation
+        GEAR_EarMuffs
     }
     public enum RandomLegsOuter
     {
-        GEAR_CargoPants, GEAR_CombatPants, GEAR_DeerSkinPants, GEAR_Jeans, GEAR_InsulatedPants, GEAR_WorkPants, GEAR_MinersPants, GEAR_WolfSkinPant
+        GEAR_CargoPants, GEAR_CombatPants, GEAR_Jeans, GEAR_InsulatedPants, GEAR_WorkPants
     }
     public enum RandomLegsInner
     {
-        GEAR_LongUnderwear, GEAR_LongUnderwearWool, GEAR_BearskinLeggings_MOD
+        GEAR_LongUnderwear, GEAR_LongUnderwearWool
     }
     public enum RandomFeetInner
     {
-        GEAR_ClimbingSocks, GEAR_CottonSocks, GEAR_WoolSocks, GEAR_SockPlaid, GEAR_SockMoose, GEAR_SockDots
+        GEAR_ClimbingSocks, GEAR_CottonSocks, GEAR_WoolSocks
     }
     public enum RandomFeetOuter
     {
-        GEAR_CombatBoots, GEAR_DeerSkinBoots, GEAR_InsulatedBoots, GEAR_LeatherShoes, GEAR_GreyMotherBoots, GEAR_MuklukBoots, GEAR_BasicShoes, GEAR_SkiBoots, GEAR_BasicBoots, GEAR_WorkBoots, GEAR_MinersBoots, GEAR_WolfskinBoots_MOD
+        GEAR_CombatBoots, GEAR_InsulatedBoots, GEAR_LeatherShoes, GEAR_MuklukBoots, GEAR_BasicShoes, GEAR_SkiBoots, GEAR_BasicBoots, GEAR_WorkBoots
     }
     class Patches
     {
-        // Move the random variable to class level for easier access
-        public static Il2CppSystem.Random random = new Il2CppSystem.Random();
-
         [HarmonyPatch(typeof(StartGear), "AddAllToInventory")]
         internal class CustomStartGear
         {
-            private static bool Prefix()  // <-- REPLACE THIS ENTIRE METHOD
+            public static Il2CppSystem.Random random = new Il2CppSystem.Random();
+            private static bool Prefix()
             {
                 try
                 {
@@ -75,8 +67,10 @@ namespace DLC_ChooseStartingGear_DLC
                         return true;
                     }
 
-                    if (Settings.settings.modFunction != ModFunction.Custom) return true;
+                    // If Default mode, let original method run without adding anything
+                    if (Settings.settings.modFunction == ModFunction.Default) return true;
 
+                    // For DefaultPlus and Custom modes, add the custom items
                     // Clothing
                     if (Settings.settings.clothingSet)
                     {
@@ -173,11 +167,6 @@ namespace DLC_ChooseStartingGear_DLC
                     if (Settings.settings.preparedRoseHips != 0) AddItemToInventory("GEAR_RosehipsPrepared", Settings.settings.preparedRoseHips);
                     if (Settings.settings.waterPurificationTablets != 0) AddItemToInventory("GEAR_WaterPurificationTablets", Settings.settings.waterPurificationTablets);
 
-                    // DLC First Aid Items
-                    if (Settings.settings.caffeinePills != 0) AddItemToInventory("GEAR_BottleCaffeine", Settings.settings.caffeinePills);
-                    if (Settings.settings.vitaminCPills != 0) AddItemToInventory("GEAR_BottleVitaminC", Settings.settings.vitaminCPills);
-                    if (Settings.settings.heatPad != 0) AddItemToInventory("GEAR_HeatPad", Settings.settings.heatPad);
-
                     // Food and Drink
                     if (Settings.settings.food1 != Food.None)
                     {
@@ -257,48 +246,17 @@ namespace DLC_ChooseStartingGear_DLC
                                 AddItemToInventory("GEAR_FlareGunAmmoSingle", Settings.settings.ammunitionQty);
                                 break;
                             case Weapons.GEAR_Rifle:
-                            case Weapons.GEAR_Rifle_Trader:
-                            case Weapons.GEAR_Rifle_Barbs:
-                            case Weapons.GEAR_Rifle_Curators:
-                            case Weapons.GEAR_Rifle_Vaughns:
                                 AddItemToInventory("GEAR_RifleAmmoSingle", Settings.settings.ammunitionQty);
                                 break;
                             case Weapons.GEAR_Revolver:
-                            case Weapons.GEAR_RevolverStubNosed:
-                            case Weapons.GEAR_RevolverFancy:
-                            case Weapons.GEAR_RevolverGreen:
                                 AddItemToInventory("GEAR_RevolverAmmoSingle", Settings.settings.ammunitionQty);
                                 break;
                             case Weapons.GEAR_Bow:
-                            case Weapons.GEAR_Bow_Woodwrights:
-                            case Weapons.GEAR_Bow_Manufactured:
-                            case Weapons.GEAR_Bow_Bushcraft:
-                                if (Settings.settings.arrowType == ArrowType.GEAR_Arrow)
-                                {
-                                    AddItemToInventory("GEAR_Arrow", Settings.settings.ammunitionQty);
-                                }
-                                else if (Settings.settings.arrowType == ArrowType.GEAR_ArrowManufactured)
-                                {
-                                    AddItemToInventory("GEAR_ArrowManufactured", Settings.settings.ammunitionQty);
-                                }
+                                AddItemToInventory("GEAR_Arrow", Settings.settings.ammunitionQty);
                                 break;
-
                         }
                     }
                     if (Settings.settings.whetstone) AddItemToInventory("GEAR_SharpeningStone");
-
-                    // DLC Tools
-                    if (Settings.settings.stickFlask) AddItemToInventory("GEAR_InsulatedFlask_G");
-                    if (Settings.settings.camera) AddItemToInventory("GEAR_Camera");
-                    if (Settings.settings.filmBoxColour != 0) AddItemToInventory("GEAR_FilmBoxColour", Settings.settings.filmBoxColour);
-                    if (Settings.settings.filmBoxBW != 0) AddItemToInventory("GEAR_FilmBoxBW", Settings.settings.filmBoxBW);
-                    if (Settings.settings.filmBoxSepia != 0) AddItemToInventory("GEAR_FilmBoxSepia", Settings.settings.filmBoxSepia);
-                    if (Settings.settings.wireBundle != 0) AddItemToInventory("GEAR_WireBundle", Settings.settings.wireBundle);
-                    if (Settings.settings.fuse != 0) AddItemToInventory("GEAR_Fuse", Settings.settings.fuse);
-                    if (Settings.settings.travois) AddItemToInventory("GEAR_Travois");
-                    if (Settings.settings.handheldShortwave) AddItemToInventory("GEAR_HandheldShortwave");
-                    if (Settings.settings.respirator) AddItemToInventory("GEAR_Respirator");
-                    if (Settings.settings.canister != 0) AddItemToInventory("GEAR_Canister", Settings.settings.canister);
 
                     // Materials
                     if (Settings.settings.arrowhead != 0) AddItemToInventory("GEAR_ArrowHead", Settings.settings.arrowhead);
@@ -326,9 +284,6 @@ namespace DLC_ChooseStartingGear_DLC
                     if (Settings.settings.wolfPeltCured != 0) AddItemToInventory("GEAR_WolfPeltDried", Settings.settings.wolfPeltCured);
                     if (Settings.settings.wolfPeltFresh != 0) AddItemToInventory("GEAR_WolfPelt", Settings.settings.wolfPeltFresh);
 
-                    // DLC Materials
-                    if (Settings.settings.cougarClaw != 0) AddItemToInventory("GEAR_CougarClaw", Settings.settings.cougarClaw);
-
                     if (Settings.settings.birchSaplingCured != 0) AddItemToInventory("GEAR_BirchSaplingDried", Settings.settings.birchSaplingCured);
                     if (Settings.settings.birchSaplingFresh != 0) AddItemToInventory("GEAR_BirchSapling", Settings.settings.birchSaplingFresh);
                     if (Settings.settings.mapleSaplingCured != 0) AddItemToInventory("GEAR_MapleSaplingDried", Settings.settings.mapleSaplingCured);
@@ -338,8 +293,9 @@ namespace DLC_ChooseStartingGear_DLC
                     if (Settings.settings.curedLeather != 0) AddItemToInventory("GEAR_LeatherDried", Settings.settings.curedLeather);
                     if (Settings.settings.scrapMetal != 0) AddItemToInventory("GEAR_ScrapMetal", Settings.settings.scrapMetal);
 
-                    return false;
-
+                    // For DefaultPlus: return true to also run the original method and add default gear
+                    // For Custom: return false to prevent the original method from running
+                    return Settings.settings.modFunction == ModFunction.DefaultPlus;
                 }
                 catch (Exception ex)
                 {
@@ -378,15 +334,19 @@ namespace DLC_ChooseStartingGear_DLC
             GearItem newClothingItem;
             if (condition > 0)
             {
-                // Use normalized condition (0.0 to 1.0 range)
-                float normalizedCondition = condition / 100f; // Assuming condition is passed as percentage
+                // Round the condition to 2 decimal places to avoid floating-point precision issues
+                // This ensures that 0.69 stays as 0.69 and doesn't get rounded to 0.70
+                float normalizedCondition = (float)Math.Round(condition, 2);
+
+                // Clamp the value to ensure it's within valid range (0.0 to 1.0)
+                normalizedCondition = Mathf.Clamp01(normalizedCondition);
+
                 newClothingItem = GameManager.GetPlayerManagerComponent().InstantiateItemInPlayerInventory(gearItemPrefab, 1, normalizedCondition);
             }
             else
             {
-                // Generate random condition between 0.1 and 1.0 (10% to 100%)
-                float randomCondition = (float)(random.NextDouble() * 0.9 + 0.1);
-                newClothingItem = GameManager.GetPlayerManagerComponent().InstantiateItemInPlayerInventory(gearItemPrefab, 1, randomCondition);
+                // Use default condition (1.0 = 100%)
+                newClothingItem = GameManager.GetPlayerManagerComponent().InstantiateItemInPlayerInventory(gearItemPrefab, 1);
             }
 
             // Check if the item has a clothing component before trying to put it on
@@ -399,7 +359,7 @@ namespace DLC_ChooseStartingGear_DLC
         private static T RandomEnumValue<T>() where T : Enum
         {
             var values = Enum.GetValues(typeof(T));
-            return (T)values.GetValue(random.Next(values.Length));
+            return (T)values.GetValue(CustomStartGear.random.Next(values.Length));
         }
     }
 }
